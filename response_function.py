@@ -1,6 +1,6 @@
 # Forms Alexa's reponse given the temperature and clothing.
 def response_function(temperature, clothing):
-    return "Based on the weather, you should wear " + clothing + " because the temperature is " + str(temperature)
+    return "Based on the weather, you should wear " + clothing + " because the temperature is " + str(temperature) + " degrees."
 
 # For testing only.
 def main():
