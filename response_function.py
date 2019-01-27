@@ -1,8 +1,9 @@
-def whatsthe_weather( temperature, clothing ):
-    alexa_reply = "Based on the weather, you should wear " + clothing + " because the temperature is " + temperature
+# Forms Alexa's reponse given the temperature and clothing.
+def response_function(temperature, clothing):
+    return "Based on the weather, you should wear " + clothing + " because the temperature is " + str(temperature)
 
-    return alexa_reply
+# For testing only.
+def main():
+    print(response_function(56.3, "raincoat"))
 
-
-result = whatsthe_weather("50", "str")
-print(result)
+main()
