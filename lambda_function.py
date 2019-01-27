@@ -1,5 +1,6 @@
 """
 This is a Python template for Alexa to get you building skills (conversations) quickly.
+Adapted from: https://github.com/KeithGalli/Alexa-Python/blob/master/basic_template.py
 """
 
 from __future__ import print_function
