@@ -73,8 +73,18 @@ def get_welcome_response(context):
     # Add GPS coords in Dark Sky API call.
     weather_output = requests.get("https://api.darksky.net/forecast/f3b60e3860754a0934693e5bbe7cf56e/37.8267,-122.4233")
     temperature = weather_output.json()["currently"]["temperature"]
+
+    if weather_output.json()["currently"]["summary"] == "Clear":
+        condition = True
+    else:
+        condition = False
     
-    clothing = clothing_function(temperature)
+    if weather_output.json()["currently"]["precipProbability"] != 0:
+        raining = True
+    else:
+        raining = False
+
+    clothing = clothing_function(temperature, raining, condition)
 
     speech_output = response_function(temperature, clothing)
 
