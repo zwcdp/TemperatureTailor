@@ -11,11 +11,11 @@ def clothing_function(temperature):
     return clothing
 
 
-def main():
-    
-    testTemperature = 42
-
-    print(clothing_function(testTemperature))
-
-main()
+#def main():
+#    
+#    testTemperature = 42
+#
+#    print(clothing_function(testTemperature))
+#
+#main()
 
