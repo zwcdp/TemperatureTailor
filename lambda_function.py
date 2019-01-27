@@ -6,8 +6,8 @@ Adapted from: https://github.com/KeithGalli/Alexa-Python/blob/master/basic_templ
 
 from __future__ import print_function
 import requests
-import clothing_function
-import response_function
+from clothing_function import clothing_function
+from response_function import response_function
 
 # --------------- Helpers that build all of the responses ----------------------
 
