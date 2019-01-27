@@ -3,8 +3,9 @@ This is a Python template for Alexa to get you building skills (conversations) q
 Adapted from: https://github.com/KeithGalli/Alexa-Python/blob/master/basic_template.py
 """
 
-from __future__ import print_function
 
+from __future__ import print_function
+import requests
 
 # --------------- Helpers that build all of the responses ----------------------
 
@@ -55,7 +56,10 @@ def get_welcome_response():
     """
     session_attributes = {}
     card_title = "Welcome"
-    speech_output = "Welcome to your custom alexa application!"
+    #speech_output = "Welcome to your custom alexa application!"
+    weather_output = request.get("https://api.darksky.net/forecast/f3b60e3860754a0934693e5bbe7cf56e/37.8267,-122.4233")
+    speech_output = weather_output.json()["currently"]["temperature"]
+
     # If the user either does not reply to the welcome message or says something
     # that is not understood, they will be prompted again with this text.
     reprompt_text = "I don't know if you heard me, welcome to your custom alexa application!"

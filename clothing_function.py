@@ -1,11 +1,5 @@
-
-
-def main():
-    clothing_function(42)
-
-
+# Function to determine what clothing to wear given the current temperature.
 def clothing_function(temperature):
-    clothing = ""
     
     if temperature < 46:
         clothing = "wear heave coat."
@@ -13,7 +7,15 @@ def clothing_function(temperature):
         clothing = "wear fleece jacket or big sweater and scarf."
     if temperature > 69:
         clothing = "optional light jacket."
-    clothing = "enjoy the nice weather."
     
-    print(clothing)
     return clothing
+
+
+def main():
+    
+    testTemperature = 42
+
+    print(clothing_function(testTemperature))
+
+main()
+
