@@ -2,9 +2,9 @@
 def clothing_function(temperature):
     
     if temperature < 46:
-        clothing = "wear heavy coat."
+        clothing = " heavy coat."
     if temperature > 46 and temperature < 69:
-        clothing = "wear fleece jacket or big sweater and scarf."
+        clothing = " fleece jacket or big sweater and scarf."
     if temperature > 69:
         clothing = "optional light jacket."
     
