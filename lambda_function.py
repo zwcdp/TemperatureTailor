@@ -5,7 +5,7 @@ Adapted from: https://github.com/KeithGalli/Alexa-Python/blob/master/basic_templ
 
 
 from __future__ import print_function
-import requests
+from botocore.vendored import requests
 from clothing_function import clothing_function
 from response_function import response_function
 
@@ -52,7 +52,7 @@ def get_test_response():
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
 
-def get_welcome_response():
+def get_welcome_response(context):
     """ If we wanted to initialize the session to have some attributes we could
     add those here
     """
@@ -61,8 +61,19 @@ def get_welcome_response():
     
     #speech_output = "Welcome to your custom alexa application!"
     
-    weather_output = request.get("https://api.darksky.net/forecast/f3b60e3860754a0934693e5bbe7cf56e/37.8267,-122.4233")
+
+    # Get ZIP code from Alexa Address API.
+    #deviceId = context.System.device.deviceId
+    #apiAccessToken = context.System.apiAccessToken
+    #countryAndPostalCode = requests.get("https://api.amazonalexa.com/v1/devices/" + deviceId + "/settings/address/countryAndPostalCode");
+    #zipCode = countryAndPostalCode.postalCode   # Stored as a string.
+
+    # Give ZIP to ZIPAPI and receive GPS coords.
+
+    # Add GPS coords in Dark Sky API call.
+    weather_output = requests.get("https://api.darksky.net/forecast/f3b60e3860754a0934693e5bbe7cf56e/37.8267,-122.4233")
     temperature = weather_output.json()["currently"]["temperature"]
+    
     clothing = clothing_function(temperature)
 
     speech_output = response_function(temperature, clothing)
@@ -70,7 +81,7 @@ def get_welcome_response():
     # If the user either does not reply to the welcome message or says something
     # that is not understood, they will be prompted again with this text.
     reprompt_text = "I don't know if you heard me, welcome to your custom alexa application!"
-    should_end_session = False
+    should_end_session = True;
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
 
@@ -96,12 +107,12 @@ def on_session_started(session_started_request, session):
 
     
 
-def on_launch(launch_request, session):
+def on_launch(launch_request, session, context):
     """ Called when the user launches the skill without specifying what they
     want
     """
     # Dispatch to your skill's launch message
-    return get_welcome_response()
+    return get_welcome_response(context)
 
 
 def on_intent(intent_request, session):
@@ -153,7 +164,7 @@ def lambda_handler(event, context):
                            event['session'])
 
     if event['request']['type'] == "LaunchRequest":
-        return on_launch(event['request'], event['session'])
+        return on_launch(event['request'], event['session'], context)
     elif event['request']['type'] == "IntentRequest":
         return on_intent(event['request'], event['session'])
     elif event['request']['type'] == "SessionEndedRequest":
